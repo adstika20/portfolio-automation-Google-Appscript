@@ -1,3 +1,5 @@
+// Create a New Document
+
 function createDoc(){
   var doc = DocumentApp.create('First Document')
   Logger.log('ID: '+ doc.getId());
@@ -13,6 +15,7 @@ function openDocByUrl (){
 }
 
 // Add Formatted Text
+
 function addStyledText() {
   var doc = DocumentApp.openByUrl('https://docs.google.com/open?id=195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic');
   var body = doc.getBody();
