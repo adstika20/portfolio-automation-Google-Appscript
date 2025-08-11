@@ -1,1 +1,22 @@
-{"files":[{"id":"f3fed51d-4792-4e07-bc97-d296182d7ce5","name":"appsscript","type":"json","source":"{\n  \"timeZone\": \"Asia/Bangkok\",\n  \"dependencies\": {\n  },\n  \"exceptionLogging\": \"STACKDRIVER\",\n  \"runtimeVersion\": \"V8\"\n}"},{"id":"70c3bb81-ec06-48d8-b68b-6f79ee18af11","name":"Code","type":"server_js","source":"function createDoc(){\n  var doc \u003d DocumentApp.create(\u0027First Document\u0027)\n  Logger.log(\u0027ID: \u0027+ doc.getId());\n  Logger.log(\u0027URL: \u0027+ doc.getUrl());\n}\n\n// Open a Document by URL\n\nfunction openDocByUrl (){\n  var doc \u003d DocumentApp.openByUrl(\u0027https://docs.google.com/open?id\u003d195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic\u0027);\n  var body \u003d doc.getBody();\n  body.appendParagraph(\u0027Learn Google App Script\u0027);\n}\n\n// Add Formatted Text\nfunction addStyledText() {\n  var doc \u003d DocumentApp.openByUrl(\u0027https://docs.google.com/open?id\u003d195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic\u0027);\n  var body \u003d doc.getBody();\n  var paragraph \u003d body.appendParagraph(\u0027Teks Tebal dan Miring\u0027);\n  paragraph.setBold(true).setItalic(true).setFontSize(14);\n}\n\n"}]}
+function createDoc(){
+  var doc = DocumentApp.create('First Document')
+  Logger.log('ID: '+ doc.getId());
+  Logger.log('URL: '+ doc.getUrl());
+}
+
+// Open a Document by URL
+
+function openDocByUrl (){
+  var doc = DocumentApp.openByUrl('https://docs.google.com/open?id=195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic');
+  var body = doc.getBody();
+  body.appendParagraph('Learn Google App Script');
+}
+
+// Add Formatted Text
+function addStyledText() {
+  var doc = DocumentApp.openByUrl('https://docs.google.com/open?id=195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic');
+  var body = doc.getBody();
+  var paragraph = body.appendParagraph('Teks Tebal dan Miring');
+  paragraph.setBold(true).setItalic(true).setFontSize(14);
+}
+
