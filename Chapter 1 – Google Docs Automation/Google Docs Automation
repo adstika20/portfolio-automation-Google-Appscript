@@ -1,0 +1,21 @@
+function createDoc(){
+  var doc = DocumentApp.create('First Document')
+  Logger.log('ID: '+ doc.getId());
+  Logger.log('URL: '+ doc.getUrl());
+}
+
+// Open a Document by URL
+
+function openDocByUrl (){
+  var doc = DocumentApp.openByUrl('https://docs.google.com/open?id=195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic');
+  var body = doc.getBody();
+  body.appendParagraph('Learn Google App Script');
+}
+
+// Add Formatted Text
+function addStyledText() {
+  var doc = DocumentApp.openByUrl('https://docs.google.com/open?id=195WJVBVetZdHfC-jZapnqFSku1RHe0VBggKA4oew3ic');
+  var body = doc.getBody();
+  var paragraph = body.appendParagraph('Teks Tebal dan Miring');
+  paragraph.setBold(true).setItalic(true).setFontSize(14);
+}
