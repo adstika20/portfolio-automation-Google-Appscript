@@ -1,0 +1,56 @@
+// MANIPULATE BODY IN GOOGLE DOCS USING GOOGLE APPS SCRIPT
+
+function createNewDoc(){
+  var doc = DocumentApp.create('This is my first document!')
+  Logger.log('ID: '+ doc.getId());
+  Logger.log('URL: '+ doc.getUrl());
+}
+
+function editDoc(){
+  var doc = DocumentApp.openById("1jTovlaIbvwTdn0Az8zw3dLE64WspQvBB9GWi_Zg87VE");
+  var body = doc.getBody();
+
+  // Add a paragraph
+  body.appendParagraph("This is the first paragraph");
+  body.appendParagraph("This is the second paragraph");
+
+  // Get all Paragraphs
+  var paraList = body.getParagraphs();
+
+  // Edit the second paragraph
+  var paragrph = paraList[2];
+  paragrph.appendText("- Add text");
+
+  // Set style for the second paragraph
+  var style = {};
+  style[DocumentApp.Attribute.BOLD]=true;
+  style[DocumentApp.Attribute.FOREGROUND_COLOR] = '#FF0000';
+  style[DocumentApp.Attribute.BACKGROUND_COLOR] = '#FFFF00';
+
+  paragrph.setAttributes(style);
+}
+
+// Learn to clear the document body
+function learnClear(){
+  var doc = DocumentApp.openById("1jTovlaIbvwTdn0Az8zw3dLE64WspQvBB9GWi_Zg87VE");
+  var body = doc.getBody();
+
+  body.clear();
+}
+
+// Learn to copy a document
+function learnCopy(){
+  var realdoc = DocumentApp.openById("1jTovlaIbvwTdn0Az8zw3dLE64WspQvBB9GWi_Zg87VE");
+  var realbody = realdoc.getBody();
+
+  var copyBody = realbody.copy();
+
+  var newDoc = DocumentApp.create("Docs copy");
+  var newBody = newDoc.getBody();
+
+  newBody.setText("");
+  newBody.appendParagraph("This is the real document result");
+  newBody.appendParagraph(copyBody.getText());
+
+  Logger.log("The new Docs file has been created: "+ newDoc.getUrl());
+}
