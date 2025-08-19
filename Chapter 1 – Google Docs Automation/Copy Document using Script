@@ -1,0 +1,33 @@
+function copyDoc(){
+
+// Basic function to copy a document
+  var srcDoc = DocumentApp.openById('1dY_WOs0F-kh6kg5X5pWbC7US3m3TIZgRmC4MIKvHoCY');  // Prepare the source document
+  var targetDoc = DocumentApp.openById('1MPLHvURPMEyueBgUvaXSSXlCA2XMo-d_CZzb_k4Uwvs'); // Prepare the target document
+
+// Retrieve the document contents
+  var srcDocTotal = srcDoc.getNumChildren(); // Count the number of elements
+  var targetDocBody = targetDoc.getBody(); // Get the body of the target document
+
+  targetDocBody.clear(); // Clear the contents of the target document
+
+  targetDocBody.appendParagraph('Last update '+ Date()).setFontSize(8).appendHorizontalRule(); // Add a date paragraph, set the font size, and insert a horizontal line
+
+
+// Copy the contents with a loop
+  for (var x=0; x<srcDocTotal; x++){
+    var el = srcDoc.getChild(x).copy();
+    var elType = el.getType();
+    if(elType==DocumentApp.ElementType.PARAGRAPH){
+      targetDocBody.appendParagraph(el);
+    }
+
+    else if(elType==DocumentApp.ElementType.LIST_ITEM){
+      targetDocBody.appendListItem(el);
+    }
+
+    else if(elType==DocumentApp.ElementType.TABLE){
+      targetDocBody.appendTable(el);
+    }
+    Logger.log(elType);
+  } 
+}
