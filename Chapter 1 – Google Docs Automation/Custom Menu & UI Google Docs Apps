@@ -1,0 +1,145 @@
+function onOpen(){
+  DocumentApp.getUi()
+  .createMenu('Advanced')
+  .addItem('Basic Alert', 'myfun1')
+  .addItem('Alert with Button', 'myfun2')
+  .addSeparator()
+  .addItem('Show Email', 'myfun3')
+  .addItem('Show Locate and Timezone', 'myfun4')
+  .addItem('Prompt Name', 'myfun5')
+  .addItem('Inline modal', 'myfun6')
+  .addItem('Modal from file', 'myfun7')
+  .addToUi();
+}
+
+// Basic alert
+function myfun1(){
+  var ui = DocumentApp.getUi();
+  ui.alert('This is basic alert!')
+  Logger.log('first was run');
+}
+
+// Alert with button
+function myfun2(){
+  var ui = DocumentApp.getUi();
+  var result = ui.alert(
+    "Confirm",
+    "are you logged in? ",
+    ui.ButtonSet.YES_NO_CANCEL
+  );
+
+  if(result == ui.Button.YES){
+    ui.alert("you choose: YES");
+  } else if (result == ui.Button.NO){
+    ui.alert("you choose NO");
+
+  }else {
+    ui.alert("You choose CANCEL");
+  }
+  Logger.log('first was run');
+}
+
+// Show Email 
+function myfun3(){
+  var email = Session.getActiveUser().getEmail();
+  DocumentApp.getUi().alert("Your email: "+ email);
+  Logger.log('first was run');
+}
+
+// Show Locate and Timezone
+function myfun4(){
+  var ui = DocumentApp.getUi();
+  var locale = Session.getActiveUserLocale();
+  var timezone = Session.getScriptTimeZone();
+
+  ui.alert("Your locale: " + locale + "\nTimezone script: "+ timezone
+  );
+  Logger.log('first was run');
+}
+
+// Prompt Name
+function myfun5(){
+  var ui = DocumentApp.getUi();
+  var respone = ui.prompt("what's your name ?");
+
+  var name = respone.getResponseText();
+  ui.alert("halo, "+name + "!");
+  Logger.log('first was run');
+}
+
+// Inline Modal
+function myfun6(){
+  var htmlOut = HtmlService
+    .createHtmlOutput("<h1>Hello World</h1><p>Ini modal dialog dengan HTML inline</p>")
+    .setTitle("Modal Inline")
+    .setWidth(400)
+    .setHeight(300);
+  DocumentApp.getUi().showModalDialog(htmlOut, "Contoh modal inline");
+}
+
+// Modal from file .html
+function myFun7(){
+  var htmlOut = HtmlService.createHtmlOutputFromFile("modal")
+  .setTitle("Modal dari file")
+  .setWidth(500)
+  .setHeight(400);
+
+  DocumentApp.getUi().showModalDialog(htmlOut, "contoh modal file");
+}
+
+
+// File: modal.html
+// Lokasi: File HTML terpisah di Apps Script project
+// Fungsi: Ditampilkan lewat HtmlService.createHtmlOutputFromFile()
+
+
+// Contoh isi modal.html:
+
+
+// <!DOCTYPE html>
+// <html>
+//   <head>
+//     <base target="_top">
+//     <style>
+//       div {
+//         background-color: lightblue;
+//         padding: 20px;
+//         border-radius: 10px;
+//         text-align: center;
+//       }
+//     </style>
+//   </head>
+//   <body>
+//     <div>
+//       <h2> Hello from modal.html</h2>
+//       <p> This is the complete HTML with CSS</p>
+//       <button onclick="google.script.host.close()">Tutup</button>
+    
+//   </body>
+// </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
