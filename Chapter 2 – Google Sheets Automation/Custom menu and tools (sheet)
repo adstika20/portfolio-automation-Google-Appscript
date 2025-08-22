@@ -1,0 +1,108 @@
+// Creates a custom menu called "Advances" in Google Sheets UI
+function onOpen(e){
+  SpreadsheetApp.getUi()
+  .createMenu('Advances')
+  .addItem('fun 1','fun1')
+  .addItem('fun 2','fun2')
+  .addSeparator()
+  .addItem('fun 3','fun3')
+  .addItem('fun 4','fun4')
+  .addItem('fun 5','fun5')
+  .addItem('fun 6','fun6')
+  .addItem('fun 7','fun7')
+  .addToUi();
+}
+
+// The active sheet name
+function fun1(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log(ss.getUrl());
+  var sheet = ss.getActiveSheet();
+  Logger.log(sheet.getName());
+}
+// https://docs.google.com/spreadsheets/d/1rZxiCulAFj0FYJsmehFh6GlgL1NP1ZQXpmJxthgRqx8/edit
+
+// Displays a popup dialog box asking for the user’s name
+function fun2(){
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt('Getting to know you', 'May i know your name?', ui.ButtonSet.YES_NO);
+}
+
+// Creates and displays a sidebar with a simple HTML message
+function fun3(){
+  var ui = SpreadsheetApp.getUi();
+  var html = HtmlService.createHtmlOutput('<h1> Welcome Ades</h2>');
+  ui.showSidebar(html);
+}
+
+// Reads and manipulates the currently selected range
+function fun4(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveRange();
+  ss.clearContent()
+  ss.getFontSize();
+  ss.getA1Notation()
+  Logger.log(ss.getA1Notation());
+  logOut(ss.getValues());
+}
+
+// Copies selected data from the active sheet and appends it to another sheet (Sheet4).
+
+function fun5(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var outputSheet = ss.getSheetByName('sheet4');
+  var selectedContent = ss.getActiveRange().getValues();
+  Logger.log(selectedContent);
+
+  var fixed = selectedContent.join().split(',');
+  Logger.log(selectedContent.length);
+  for(var x=0; x<selectedContent.length; x++){
+    outputSheet.appendRow(selectedContent[x]);
+  }
+}
+
+// Copies the selected range (including formatting) from the active sheet into Sheet5 at the same range position.
+// The target range must match the source size
+function fun6(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var outputSheet = ss.getSheetByName('sheet5');
+  var selRange = ss.getActiveRange().getA1Notation();
+  logOut(selRange);
+  ss.getActiveRange().copyTo(outputSheet.getRange(selRange));
+}
+
+
+// Search and highlight functionality:
+// Prompts the user for a search term.
+// Iterates through all cells in the active sheet.
+// Highlights cells containing the search term (case-insensitive).
+// Logs the positions (row, column) where matches are found.
+
+function fun7(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt('Searcher', 'What value did you want to find?', ui.ButtonSet.OK).getResponseText();
+  
+  var data = ss.getDataRange().getValues();
+  var output = '<h1> Search Result </h1>';
+  
+  for (var x = 0; x < data.length; x++) {
+    for (var i = 0; i < data[x].length; i++) {
+      var cellValue = data[x][i].toString(); // ubah ke string biar aman
+      Logger.log(cellValue);
+      
+      if (cellValue.toLowerCase().includes(response.toLowerCase())) {
+        output += 'Found row=' + (x+1) + ' column=' + (i+1) + '<br>'; 
+        ss.getRange((x+1), (i+1)).setBackground('yellow');
+      }
+    }
+  }
+  
+  Logger.log(output);
+}
+
+// Helper function that displays a message in a dialog box
+function logOut(message){
+  var ui = SpreadsheetApp.getUi();
+  var html = HtmlService.createHtmlOutput('<h1>'+message+'</h1>');
+  ui.showModelessDialog(html,'Selection');
+}
