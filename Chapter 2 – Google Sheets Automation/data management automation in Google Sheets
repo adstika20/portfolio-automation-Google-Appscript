@@ -1,0 +1,77 @@
+// Copying data from Spreadsheet into Google Docs
+function doc1(){
+  var doc = DocumentApp.create('new doc');
+  Logger.log(doc.getId());
+  Logger.log(doc.getUrl());
+}
+// 12JgEabW8XXeVBQ79JuX5Hl2VkpAYLxbIsERvay48dzc
+// https://docs.google.com/open?id=12JgEabW8XXeVBQ79JuX5Hl2VkpAYLxbIsERvay48dzc
+
+function fun4(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var sheet = ss.getSheets()[0];
+  var doc = DocumentApp.openById('12JgEabW8XXeVBQ79JuX5Hl2VkpAYLxbIsERvay48dzc')
+  var body = doc.getBody();
+  var rowData = sheet.getRange(1, 1, sheet.getLastRow(),sheet.getLastColumn()).getValues();
+  Logger.log(rowData);
+  body.insertParagraph(0, ss.getName())
+  .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  var table = body.appendTable(rowData);
+  table.getRow(0).editAsText().setBold(true);
+}
+
+// // automatic archive that records when new tables are added to a document
+function myFun5(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var sheet1 = ss.getSheetByName('sheet1');
+  var tracking = ss.getSheetByName('tracking');
+  var rowData = sheet1.getRange(1, 1, sheet1.getLastRow(), sheet1.getLastColumn()).getValues();
+  Logger.log(rowData);
+
+  var doc = DocumentApp.openById('12JgEabW8XXeVBQ79JuX5Hl2VkpAYLxbIsERvay48dzc')
+  var body = doc.getBody();
+  body.appendParagraph('New Table#' + tracking.getLastRow())
+  .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  var tabel = body.appendTable(rowData);
+  var adder = tracking.appendRow([doc.getName(),doc.getId(),doc.getUrl(),Date()])
+}
+
+// auto resize on column
+function myFun6(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var tracking = ss.getSheetByName('tracking');
+  tracking.autoResizeColumns(1, 4);
+}
+
+// clear sheet 
+function fun7(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var tracking = ss.getSheetByName('sheet3');
+  //tracking.clear();
+  //tracking.clearFormats()
+  //tracking.clearNotes();
+  tracking.clear({formatOnly:true,contentsOnly:false});
+}
+
+// duplicate/backup sheet to a new spreadsheet
+function fun8(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var sheet = ss.getSheetByName('sheet3'); 
+  var newss = SpreadsheetApp.create('newly created');
+  sheet.copyTo(newss);
+
+}
+// Manage sheet structure (delete columns, check properties, protect, show sheet)
+function fun9(){
+  var ss = SpreadsheetApp.openById('1x0mUwpvmFA48JXYRRGr3eYgf4T8dGbHMiwKLq9Co2j4');
+  var sheet = ss.getSheetByName('Sheet1');
+  sheet.deleteColumn(2);
+  Logger.log(sheet.getIndex());
+  Logger.log(sheet.getLastColumn());
+  Logger.log(sheet.getMaxColumns());
+  Logger.log(sheet.getName());
+  Logger.log(sheet.getParent());
+  sheet.showSheet();
+  Logger.log(sheet.isSheetHidden());
+  logger.log(sheet.protect());
+}
