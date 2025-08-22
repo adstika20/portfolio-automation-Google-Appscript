@@ -1,0 +1,33 @@
+// Create new sheet 
+function myFunction() {
+  var ss = SpreadsheetApp.create('New test sheet 3', 50, 20)
+  Logger.log(ss.getUrl());
+  Logger.log(ss.getId()); 
+}
+// https://docs.google.com/spreadsheets/d/
+
+// Color some cells/ranges.
+function myFun1(){
+  var ss = SpreadsheetApp.openById('145FvRLcqEcpZMKSn0RGoAd3MJ0Fl6_1d_ZMiJ51zZUc');
+  var sheet = ss.getSheets()[0];
+  ss.getRange('A1').setBackground('red');
+  ss.getRange('B2').setBackground('blue');
+  var range = sheet.getRange(10,5,8,4).setBackground('green');
+  Logger.log(ss.getName());
+}
+
+// Automatic data input
+function myFun2(){
+  var ss = SpreadsheetApp.openById('145FvRLcqEcpZMKSn0RGoAd3MJ0Fl6_1d_ZMiJ51zZUc');
+  var sheet = ss.getSheets()[0];
+  var range = sheet.getRange(1,1,2,4);
+  var colorBack = range.setBackground('purple');
+  Logger.log(ss.getName());
+  Logger.log(range.getValues());
+  var tempValue = [['value 1', 'value 2', 'value 3', 'value 4'], ['value 1', 'value 2', 'value 3', 'value 4']];
+  range.setValues(tempValue);
+  Logger.log(range.getValues());
+  var range1 = sheet.getRange(7,4,1,2);
+  var arr = [['one', 'two']];
+  range1.setValues(arr);
+}
