@@ -1,7 +1,7 @@
 # Chapter 2 – Google Sheets Automation
 
 The following explanation is documentation derived from the project at this link:
-[Link](https://github.com/adstika20/portfolio-automation-Google-Appscript/blob/main/Chapter%202%20%E2%80%93%20Google%20Sheets%20Automation/Google%20Sheets%20Dashboard%20with%20Custom%20Menu)
+[Google Sheets Dashboard with Custom Menu](https://github.com/adstika20/portfolio-automation-Google-Appscript/blob/main/Chapter%202%20%E2%80%93%20Google%20Sheets%20Automation/Google%20Sheets%20Dashboard%20with%20Custom%20Menu)
 
 ## Google Sheets Dashboard & Data Viewer (with Custom Menu)
 
