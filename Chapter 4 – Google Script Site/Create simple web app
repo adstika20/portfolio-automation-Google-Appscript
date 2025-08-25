@@ -1,0 +1,26 @@
+// Create a simple web 
+function doGet() {
+  return HtmlService.createHtmlOutput('<h1>Hai nama saya adalah ades tikaningsih tinggal di paguyangan</h>')
+}
+
+// Google Apps Script Web App with Bootstrap View
+function doGet() {
+  var output = HtmlService.createHtmlOutputFromFile('index');
+  return output;
+}
+
+// File index.html
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contoh Web App</title>
+    <!-- Tambahkan Bootstrap CDN -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  </head>
+  <body class="container">
+    <h1 class="text-primary">Halo, ini Web App dengan Bootstrap</h1>
+    <p>Ini contoh sederhana menambahkan CSS dari Bootstrap.</p>
+  </body>
+</html> --> -->
+
